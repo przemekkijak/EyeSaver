@@ -37,22 +37,23 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.button2 = new System.Windows.Forms.Button();
             this.pauseButton = new System.Windows.Forms.Button();
+            this.stopButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(104, 145);
+            this.startButton.Location = new System.Drawing.Point(144, 156);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(91, 50);
+            this.startButton.Size = new System.Drawing.Size(101, 35);
             this.startButton.TabIndex = 0;
             this.startButton.Text = "Start";
             this.startButton.UseVisualStyleBackColor = true;
-            this.startButton.Click += new System.EventHandler(this.button1_Click);
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
             // timer
             // 
             this.timer.Interval = 1000;
-            this.timer.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // timerLabel
             // 
@@ -76,9 +77,9 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(144, 102);
+            this.progressBar1.Location = new System.Drawing.Point(114, 102);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(112, 23);
+            this.progressBar1.Size = new System.Drawing.Size(169, 23);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar1.TabIndex = 3;
             // 
@@ -96,19 +97,30 @@
             // 
             // pauseButton
             // 
-            this.pauseButton.Location = new System.Drawing.Point(201, 145);
+            this.pauseButton.Location = new System.Drawing.Point(34, 156);
             this.pauseButton.Name = "pauseButton";
-            this.pauseButton.Size = new System.Drawing.Size(91, 50);
+            this.pauseButton.Size = new System.Drawing.Size(104, 35);
             this.pauseButton.TabIndex = 5;
             this.pauseButton.Text = "Pause";
             this.pauseButton.UseVisualStyleBackColor = true;
-            this.pauseButton.Click += new System.EventHandler(this.button3_Click);
+            this.pauseButton.Click += new System.EventHandler(this.pauseButton_Click);
+            // 
+            // stopButton
+            // 
+            this.stopButton.Location = new System.Drawing.Point(251, 156);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(101, 35);
+            this.stopButton.TabIndex = 6;
+            this.stopButton.Text = "Stop";
+            this.stopButton.UseVisualStyleBackColor = true;
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(409, 241);
+            this.Controls.Add(this.stopButton);
             this.Controls.Add(this.pauseButton);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.progressBar1);
@@ -131,5 +143,6 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button pauseButton;
+        private System.Windows.Forms.Button stopButton;
     }
 }

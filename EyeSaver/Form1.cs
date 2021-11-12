@@ -19,6 +19,14 @@ namespace EyeSaver
             LongBreak = 2
         };
 
+
+        public enum ModeMinutesSetting
+        {
+            Work = 30,
+            Break = 3,
+            LongBreak = 15
+        }
+
         int currentMode = 0;
         int currentInterval = 0;
 
@@ -35,12 +43,12 @@ namespace EyeSaver
         }
 
 
-        private void button1_Click(object sender, EventArgs e)
+        private void startButton_Click(object sender, EventArgs e)
         {
             timer.Start();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
             if(minutes >= 0)
             {
@@ -100,9 +108,30 @@ namespace EyeSaver
             f2.ShowDialog();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void pauseButton_Click(object sender, EventArgs e)
         {
             timer.Stop();
+        }
+
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            timer.Stop();
+            seconds = 0;
+            switch(currentMode)
+            {
+                case (int) PomodoroMode.Work:
+                    minutes = (int) ModeMinutesSetting.Work;
+                    break;
+
+                case (int)PomodoroMode.Break:
+                    minutes = (int)ModeMinutesSetting.Break;
+                    break;
+
+                case (int)PomodoroMode.LongBreak:
+                    minutes = (int)ModeMinutesSetting.LongBreak;
+                    break;
+            }
+            UpdateTimerLabelText();
         }
     }
 }
