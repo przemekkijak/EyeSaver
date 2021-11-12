@@ -1,6 +1,6 @@
 ﻿namespace EyeSaver
 {
-    partial class Form1
+    partial class mainForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -30,14 +30,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
             this.startButton = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.timerLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.button2 = new System.Windows.Forms.Button();
             this.pauseButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.SuspendLayout();
             // 
             // startButton
@@ -59,7 +60,7 @@
             // 
             this.timerLabel.AutoSize = true;
             this.timerLabel.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.timerLabel.Location = new System.Drawing.Point(144, 52);
+            this.timerLabel.Location = new System.Drawing.Point(144, 70);
             this.timerLabel.Name = "timerLabel";
             this.timerLabel.Size = new System.Drawing.Size(112, 47);
             this.timerLabel.TabIndex = 1;
@@ -74,14 +75,6 @@
             this.label2.Size = new System.Drawing.Size(65, 28);
             this.label2.TabIndex = 2;
             this.label2.Text = "label2";
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(114, 102);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(169, 23);
-            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar1.TabIndex = 3;
             // 
             // button2
             // 
@@ -115,7 +108,14 @@
             this.stopButton.UseVisualStyleBackColor = true;
             this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
-            // Form1
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "EyeSaver";
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseDoubleClick);
+            // 
+            // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -123,15 +123,16 @@
             this.Controls.Add(this.stopButton);
             this.Controls.Add(this.pauseButton);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.timerLabel);
             this.Controls.Add(this.startButton);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "mainForm";
+            this.Text = "EyeSaver";
             this.ResumeLayout(false);
             this.PerformLayout();
+            this.Resize += new System.EventHandler(this.mainForm_Resize);
 
         }
 
@@ -140,9 +141,9 @@
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Label timerLabel;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button pauseButton;
         private System.Windows.Forms.Button stopButton;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 }

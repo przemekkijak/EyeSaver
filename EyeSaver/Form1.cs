@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EyeSaver
 {
-    public partial class Form1 : Form
+    public partial class mainForm : Form
     {
         public enum PomodoroMode
         {
@@ -19,29 +13,21 @@ namespace EyeSaver
             LongBreak = 2
         };
 
-
-        public enum ModeMinutesSetting
-        {
-            Work = 30,
-            Break = 3,
-            LongBreak = 15
-        }
-
         int currentMode = 0;
         int currentInterval = 0;
 
-        int minutes = 2;
+        int minutes;
         int seconds = 0;
 
-        public Form1()
+        public mainForm()
         {
+            minutes = settingsForm.defaultWorkTime;
             InitializeComponent();
 
             UpdateTimerLabelText();
             UpdateModeLabel();
 
         }
-
 
         private void startButton_Click(object sender, EventArgs e)
         {
@@ -52,25 +38,25 @@ namespace EyeSaver
         {
             if(minutes >= 0)
             {
-                if (seconds == 0)
+                if(minutes > 0 && seconds == 0)
                 {
                     minutes--;
                     seconds = 60;
                 }
 
-                if (seconds > 0)
-                    seconds--;
+                if (minutes == 0 && seconds == 0)
+                {
+                    minutes = -1;
+                    return;
+                }
 
+                seconds--;
                 UpdateTimerLabelText();
             }
             else
             {
                 timer.Stop();
-                if(currentMode == (int) PomodoroMode.Work)
-                {
-                    currentMode = (int) PomodoroMode.Break;
-                    UpdateModeLabel();
-                }
+                DisplayNotification();
             }
         }
 
@@ -104,7 +90,7 @@ namespace EyeSaver
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Form2 f2 = new Form2();
+            settingsForm f2 = new settingsForm(this);
             f2.ShowDialog();
         }
 
@@ -115,23 +101,62 @@ namespace EyeSaver
 
         private void stopButton_Click(object sender, EventArgs e)
         {
+            SetTimesToDefault();
+        }
+
+        public void SetTimesToDefault()
+        {
             timer.Stop();
             seconds = 0;
-            switch(currentMode)
+            switch (currentMode)
             {
-                case (int) PomodoroMode.Work:
-                    minutes = (int) ModeMinutesSetting.Work;
+                case (int)PomodoroMode.Work:
+                    minutes = settingsForm.defaultWorkTime;
                     break;
 
                 case (int)PomodoroMode.Break:
-                    minutes = (int)ModeMinutesSetting.Break;
+                    minutes = settingsForm.defaultBreakTime;
                     break;
 
                 case (int)PomodoroMode.LongBreak:
-                    minutes = (int)ModeMinutesSetting.LongBreak;
+                    minutes = settingsForm.defaultLongBreakTime;
                     break;
             }
             UpdateTimerLabelText();
         }
+
+        private void mainForm_Resize(object sender, EventArgs e)
+        {
+            if(this.WindowState == FormWindowState.Minimized)
+            {
+                Hide();
+            }
+        }
+
+        private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Show();
+            this.WindowState = FormWindowState.Normal;
+        }
+
+        private void DisplayNotification()
+        {
+            switch(currentMode)
+            {
+                case (int)PomodoroMode.Work:
+                    notifyIcon1.ShowBalloonTip(3000, "Take a break", "Let you eyes rest for few minutes", ToolTipIcon.None);
+                    break;
+
+                case (int)PomodoroMode.Break:
+                    notifyIcon1.ShowBalloonTip(3000, "Break is over", "Get back to work", ToolTipIcon.None);
+                    break;
+
+                case (int)PomodoroMode.LongBreak:
+                    notifyIcon1.ShowBalloonTip(3000, "Time for long rest", "You finished planned intervals, take a long break", ToolTipIcon.None);
+                    break;
+
+            }
+        }
+
     }
 }
