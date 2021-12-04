@@ -129,10 +129,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "mainForm";
-            this.Text = "EyeSaver";
+            this.Text = " ";
+            this.Resize += new System.EventHandler(this.mainForm_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
-            this.Resize += new System.EventHandler(this.mainForm_Resize);
 
         }
 

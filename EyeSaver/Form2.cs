@@ -15,6 +15,8 @@ namespace EyeSaver
         public static int defaultWorkTime = 30;
         public static int defaultBreakTime = 5;
         public static int defaultLongBreakTime = 15;
+        public static int maxIntervals = 4;
+        
         mainForm parentForm;
         public settingsForm(mainForm parent)
         {
@@ -51,8 +53,8 @@ namespace EyeSaver
             defaultWorkTime = workTrackBar.Value;
             defaultBreakTime = breakTrackBar.Value;
             defaultLongBreakTime = LongBreakTrackBar.Value;
-            parentForm.SetTimesToDefault();
-            this.Hide();
+            parentForm.SetTimeToDefault();
+            Hide();
         }
 
         private void Settings_Load(object sender, EventArgs e)

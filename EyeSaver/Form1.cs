@@ -13,11 +13,14 @@ namespace EyeSaver
             LongBreak = 2
         };
 
-        int currentMode = 0;
+        public static int MaxIntervals = 4;
+
+        private PomodoroMode currentMode; 
         int currentInterval = 0;
+        //TODO-PK long interval as settings
 
         int minutes;
-        int seconds = 0;
+        int seconds;
 
         public mainForm()
         {
@@ -57,6 +60,7 @@ namespace EyeSaver
             {
                 timer.Stop();
                 DisplayNotification();
+                ChangeMode();
             }
         }
 
@@ -64,17 +68,17 @@ namespace EyeSaver
         {
             switch (currentMode)
             {
-                case (int)PomodoroMode.Work:
+                case PomodoroMode.Work:
                     label2.Text = "Work";
                     label2.ForeColor = Color.Red;
                     break;
 
-                case (int)PomodoroMode.Break:
+                case PomodoroMode.Break:
                     label2.Text = "Break";
                     label2.ForeColor = Color.LightGreen;
                     break;
 
-                case (int)PomodoroMode.LongBreak:
+                case PomodoroMode.LongBreak:
                     label2.Text = "Long break";
                     label2.ForeColor = Color.DarkGreen;
                     break;
@@ -101,24 +105,24 @@ namespace EyeSaver
 
         private void stopButton_Click(object sender, EventArgs e)
         {
-            SetTimesToDefault();
+            SetTimeToDefault();
         }
 
-        public void SetTimesToDefault()
+        public void SetTimeToDefault()
         {
             timer.Stop();
             seconds = 0;
             switch (currentMode)
             {
-                case (int)PomodoroMode.Work:
+                case PomodoroMode.Work:
                     minutes = settingsForm.defaultWorkTime;
                     break;
 
-                case (int)PomodoroMode.Break:
+                case PomodoroMode.Break:
                     minutes = settingsForm.defaultBreakTime;
                     break;
 
-                case (int)PomodoroMode.LongBreak:
+                case PomodoroMode.LongBreak:
                     minutes = settingsForm.defaultLongBreakTime;
                     break;
             }
@@ -143,20 +147,40 @@ namespace EyeSaver
         {
             switch(currentMode)
             {
-                case (int)PomodoroMode.Work:
+                case PomodoroMode.Work:
                     notifyIcon1.ShowBalloonTip(3000, "Take a break", "Let you eyes rest for few minutes", ToolTipIcon.None);
                     break;
 
-                case (int)PomodoroMode.Break:
+                case PomodoroMode.Break:
                     notifyIcon1.ShowBalloonTip(3000, "Break is over", "Get back to work", ToolTipIcon.None);
                     break;
 
-                case (int)PomodoroMode.LongBreak:
+                case PomodoroMode.LongBreak:
                     notifyIcon1.ShowBalloonTip(3000, "Time for long rest", "You finished planned intervals, take a long break", ToolTipIcon.None);
                     break;
 
             }
         }
 
+        private void ChangeMode()
+        {
+            if (currentMode == (int) PomodoroMode.Work)
+            {
+                if (currentInterval == MaxIntervals)
+                {
+                    currentInterval = 0;
+                    currentMode = PomodoroMode.LongBreak;
+                }
+                else
+                {
+                    currentInterval++;
+                    currentMode = PomodoroMode.Break;
+                }
+            }
+            else
+            {
+                currentMode = PomodoroMode.Work;
+            }
+        }
     }
 }
