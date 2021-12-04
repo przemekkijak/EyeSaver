@@ -39,6 +39,7 @@
             this.pauseButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.interval = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // startButton
@@ -58,23 +59,23 @@
             // 
             // timerLabel
             // 
-            this.timerLabel.AutoSize = true;
             this.timerLabel.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.timerLabel.Location = new System.Drawing.Point(144, 70);
+            this.timerLabel.Location = new System.Drawing.Point(80, 85);
             this.timerLabel.Name = "timerLabel";
-            this.timerLabel.Size = new System.Drawing.Size(112, 47);
+            this.timerLabel.Size = new System.Drawing.Size(236, 47);
             this.timerLabel.TabIndex = 1;
             this.timerLabel.Text = "label1";
+            this.timerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(167, 9);
+            this.label2.Location = new System.Drawing.Point(80, 25);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 28);
+            this.label2.Size = new System.Drawing.Size(236, 45);
             this.label2.TabIndex = 2;
             this.label2.Text = "label2";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // button2
             // 
@@ -115,11 +116,21 @@
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseDoubleClick);
             // 
+            // interval
+            // 
+            this.interval.AutoSize = true;
+            this.interval.Location = new System.Drawing.Point(346, 9);
+            this.interval.Name = "interval";
+            this.interval.Size = new System.Drawing.Size(38, 15);
+            this.interval.TabIndex = 7;
+            this.interval.Text = "label1";
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(409, 241);
+            this.Controls.Add(this.interval);
             this.Controls.Add(this.stopButton);
             this.Controls.Add(this.pauseButton);
             this.Controls.Add(this.button2);
@@ -145,5 +156,6 @@
         private System.Windows.Forms.Button pauseButton;
         private System.Windows.Forms.Button stopButton;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.Label interval;
     }
 }
